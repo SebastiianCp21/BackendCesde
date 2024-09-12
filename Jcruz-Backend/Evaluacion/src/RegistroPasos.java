@@ -1,20 +1,35 @@
 import java.util.Scanner;
 
 public class RegistroPasos {
-    public static void main(String[] args) {
+
+    // variables
+    String name;
+    String email;
+    String password;
+    //array
+    int[] pasos = new int[5];
+    int totalPasos = 0;
+
+    // Método para registrar al usuario
+    public void registroUsuario() {
         Scanner scanner = new Scanner(System.in);
 
-        // Registro del usuario
         System.out.print("Ingresa tu nombre de usuario: ");
-        String name = scanner.nextLine();
+        name = scanner.nextLine();
         System.out.print("Ingresa tu email: ");
-        String email = scanner.nextLine();
+        email = scanner.nextLine();
         System.out.print("Ingresa tu contraseña: ");
-        String password = scanner.nextLine();
+        password = scanner.nextLine();
+    }
 
-        //array con 5 elementos(dias)
-        int[] pasos = new int[5];
-        int totalPasos = 0;
+    // Método para iniciar sesión
+    public boolean iniciarSesion(String email, String password) {
+        return this.email.equals(email) && this.password.equals(password);
+    }
+
+    // Método para registrar los pasos
+    public void registroPasos() {
+        Scanner scanner = new Scanner(System.in);
         int dia = 0;
 
         while (dia < 5) {
@@ -23,10 +38,11 @@ public class RegistroPasos {
             totalPasos += pasos[dia];
             dia++;
         }
-        //calculo de promedio
+
+        // Calculo de promedio
         double promedio = (double) totalPasos / 5;
 
-        System.out.println("\nInformacion del usuario: ");
+        System.out.println("\nInformación del usuario: ");
         System.out.println("Nombre: " + name);
         System.out.println("Email: " + email);
         System.out.println("\nPasos por día:");
@@ -35,5 +51,31 @@ public class RegistroPasos {
             System.out.println("Día " + (i + 1) + ": " + pasos[i] + " pasos");
         }
         System.out.println("\nPromedio de pasos en 5 días: " + promedio);
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        RegistroPasos usuario = new RegistroPasos();
+
+        // Registro de usuario
+        usuario.registroUsuario();
+
+        // Inicio de sesión
+        System.out.println("Iniciar sesión");
+        System.out.print("Correo: ");
+        String email = scanner.nextLine();
+
+        System.out.print("Contraseña: ");
+        String password = scanner.nextLine();
+
+        if (usuario.iniciarSesion(email, password)) {
+            System.out.println("Has iniciado sesión exitosamente. ¡Bienvenido " + usuario.name + "!");
+
+            // Registro de pasos
+            usuario.registroPasos();
+
+        } else {
+            System.out.println("Correo o contraseña incorrectos.");
+        }
     }
 }
